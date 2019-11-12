@@ -29,18 +29,18 @@ if (isset($_POST['studsu'])) {
             if (mysqli_query($conn, $sql)) {
                 echo "<script>
                 alert('successful!');
-                window.location.replace(\"http://localhost/DBMSproject/index.php\");</script>";
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
                 session_destroy();
             } else {
                 echo "<script>
-                alert('Alreay a user Sign In');
-                window.location.replace(\"http://localhost/DBMSproject/index.php\");</script>";
+                alert('Data enter by you alreay exist in Database please Sign In');
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
                 session_destroy();
             }
         } else {
             echo "<script>
                 alert(' Password should be same');
-                window.location.replace(\"http://localhost/DBMSproject/singup.php\");</script>";
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/singup.php\");</script>";
             session_destroy();
         }
     }
@@ -69,18 +69,18 @@ if (isset($_POST['staffsu'])) {
             if (mysqli_query($conn, $sql)) {
                 echo "<script>
                 alert('successful!');
-                window.location.replace(\"http://localhost/DBMSproject/index.php\");</script>";
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
                 session_destroy();
             } else {
                 echo "<script>
-                alert('Alreay a user Sign In');
-                window.location.replace(\"http://localhost/DBMSproject/index.php\");</script>";
+                alert('Data enter by you alreay exist in Database please Sign In');
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
                 session_destroy();
             }
         } else {
             echo "<script>
                 alert(' Password should be same');
-                window.location.replace(\"http://localhost/DBMSproject/singup.php\");</script>";
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/singup.php\");</script>";
             session_destroy();
         }
     }
@@ -158,7 +158,7 @@ if (isset($_POST['staffsu'])) {
 <body style="margin: 0;padding: 0;outline: none;">
     <div style="font-family: 'Courier New', Courier, monospace;margin: 0;padding: 0;background-color: rgba(77, 182, 224, 0.74);height: auto;width: 100%;padding-bottom: 5vw;background-image: url(images/rakesh.png);height: auto !important;">
         <center>
-            <h1 style="text-transform: uppercase;padding: 2vw;background-color: green;color: white">ONLINE
+            <h1 style="text-transform: uppercase;padding: 2vw;background-color: rgba(26, 201, 134, 0.801);color: white">ONLINE
                 Examination System</h1>
         </center>
         <div class="seluser">

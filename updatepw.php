@@ -64,7 +64,7 @@ $type= $_SESSION["type"]; ?>
 <body style="margin:0;height: 100%;outline: none;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: auto;padding-bottom: 5vw;">
         <center>
-            <h1 style=" color:white;text-transform: uppercase;width: auto;background: green;padding: 1vw;">ONLINE
+            <h1 style=" color:white;text-transform: uppercase;width: auto;background: rgba(26, 201, 134, 0.801);padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>

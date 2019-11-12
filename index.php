@@ -23,9 +23,15 @@ if (isset($_POST['login'])) {
                 $dbpw = $row['pw'];
                 $dbmail = $row['mail'];
                 $_SESSION["name"] = $row['name'];
+                $_SESSION["type"]=$type;
+                $_SESSION["username"]=$dbmail;
             }
             if ($dbpw === $password) {
-                header("location:home.php");
+                if($type==='student'){
+                    header("location:homestud.php");
+                }elseif($type==='staff'){
+                    header("Location: homestaff.php");
+                }
             } elseif ($dbpw !== $password && $dbmail === $username) {
                 echo "<script>alert('password is wrong');</script>";
             } elseif ($dbpw !== $password && $dbmail !== $username) {
@@ -70,7 +76,7 @@ if (isset($_POST['login'])) {
     }
 
     button:hover {
-        background-color: green !important;
+        background-color: rgba(26, 201, 134, 0.801) !important;
     }
 
     .bg {
@@ -81,7 +87,7 @@ if (isset($_POST['login'])) {
 <body style="margin:0;height: 100%;ouline:none;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: 100%;">
         <center>
-            <h1 style=" color:white;text-transform: uppercase;width: auto;background:green;padding: 1vw;">ONLINE
+            <h1 style=" color:white;text-transform: uppercase;width: auto;background:rgba(26, 201, 134, 0.801);padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>
