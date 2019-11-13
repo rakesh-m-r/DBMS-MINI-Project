@@ -73,25 +73,33 @@ if (isset($_POST['login'])) {
 
     label {
         font-weight: bolder;
+        font-size: 1.5vw;
+    }
+    form{
+        font-size: 1.5vw;
+        margin: 0;
     }
 
     button:hover {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color:#fff !important;
     }
 
     .bg {
         background-size: 100%;
     }
+    a{
+        color: #7e7e7e;
+    }
 </style>
 
-<body style="margin:0;height: 100%;ouline:none;">
+<body style="margin:0;height: 100%;ouline:none;color: #7e7e7ef !important;padding-botton:5vw;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: 100%;">
         <center>
-            <h1 style=" color:white;text-transform: uppercase;width: auto;background:rgba(26, 201, 134, 0.801);padding: 1vw;">ONLINE
+            <h1 style=" color:#7e7e7e;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>
-            <div class="login" style="width: 40vw;background-color: rgba(26, 201, 134, 0.801);padding: 2vw;font-weight: bolder;margin-top: 20vh;border-radius: 10px;">
+            <div class="login" style="color: #7e7e7e;width: 40vw;background-color: #fff;border: 2px solid black;padding: 2vw;font-weight: bolder;margin-top: 10vh;border-radius: 10px;">
                 <form method="POST">
                     <div class="seluser">
                         <input type="radio" name="usertype" value="student" required>STUDENT
@@ -105,7 +113,7 @@ if (isset($_POST['login'])) {
                         <label for="password" style="text-transform: uppercase;">Password</label><br><br>
                         <input type="password" name="pass" placeholder="******" class="inp" required>
                         <br><br>
-                        <input name="login" class="sub" type="submit" value="Login" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: rgb(77, 77, 236);"><br>
+                        <input name="login" class="sub" type="submit" value="Login" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color:lightblue"><br>
 
                 </form><br>
                 <a href="reset.php">Forgot password?</a> &nbsp; New user! <a href="signup.php">SIGN UP</a>

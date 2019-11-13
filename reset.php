@@ -40,7 +40,7 @@
     }
 
     button:hover {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color:#fff !important;
     }
 
     .bg {
@@ -49,7 +49,7 @@
 
     .login {
         width: 40vw;
-        background-color: rgba(26, 201, 134, 0.801);
+        background-color:#fff;
         padding: 2vw;
         font-weight: bolder;
         margin-top: 6vh;
@@ -59,10 +59,10 @@
 </style>
 
 <?php global $message;?>
-<body style="margin:0;height: 100%;outline: none;">
+<body style="margin:0;height: 100%;outline: none;color: #7e7e7e !important;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: auto;padding-bottom: 5vw;">
         <center>
-            <h1 style=" color:white;text-transform: uppercase;width: auto;background: rgba(26, 201, 134, 0.801);padding: 1vw;">ONLINE
+            <h1 style=" color:#7e7e7e;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>
@@ -85,7 +85,7 @@
                             <label for="cpass1" style="text-transform: uppercase;">Password</label><br><br>
                             <input type="password" name="cpass1" placeholder="******" class="inp" required>
                             <br><br>
-                            <input name="submit" class="sub" type="submit" value="Get the Code" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: rgb(77, 77, 236);">
+                            <input name="submit" class="sub" type="submit" value="Get the Code" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     </form><br><br>
                 </div>
                 <a href="signup.php">SIGN UP</a> &nbsp;&nbsp; <a href="index.php">Cancel</a>

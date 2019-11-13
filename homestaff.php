@@ -45,15 +45,29 @@ if (!$conn) {
             echo "<script>alert(\"Already name exists\");</script>";
         }
     }
+    if (isset($_POST['submit1'])) {
+        $qid1 = strtolower($_POST['quizid']);
+        $sql1 = "delete from quiz where quizid='{$qid1}'";
+        $res1 = mysqli_query($conn, $sql1);
+        if ($res1 == true) {
+            echo "<script>alert(\"Quiz successfully deleted\");</script>";
+        } else {
+            echo "<script>alert(\"Unknown error occured during deletion of quiz\");</script>";
+
+        }
+    }
 }
 ?>
 <style>
+    body>div{
+        min-height: 100% !important;
+    }
     table{
         border: 1px solid black;
         width: 100% !important;
         font-weight: bolder;
         font-size: 2vw;
-        color: white;
+        color: #7e7e7e;
     }
     td{
         border: 1px solid black;
@@ -72,7 +86,8 @@ if (!$conn) {
     }
 
     .navbar {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: #fff!important;
+        font-size: 1.5vw;
     }
 
     .navbar>ul>li:hover {
@@ -90,7 +105,7 @@ if (!$conn) {
 
     a {
         text-decoration: none;
-        color: white;
+        color: #7e7e7e;
     }
 
     .prof,
@@ -100,14 +115,14 @@ if (!$conn) {
         width: 50vw !important;
         margin-left: 25vw !important;
         margin-right: 25vw !important;
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: #fff!important;
         display: none !important;
         border-radius: 10px;
         margin-top: 2vw;
         z-index: 1;
         padding: 1vw;
         padding-left: 2vw;
-        color: white;
+        color: #7e7e7e;
     }
 
     button {
@@ -118,7 +133,7 @@ if (!$conn) {
         outline: none;
         border: none;
         border-radius: 10px;
-        margin: 5vw;
+        margin: 1vw;
     }
 
     input {
@@ -141,7 +156,7 @@ if (!$conn) {
     }
 
     button:hover {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: blueviolet !important;
     }
 
     .bg {
@@ -174,15 +189,52 @@ if (!$conn) {
         }
 
         p {
-            color: white !important;
+            color: #7e7e7e !important;
         }
 
     }
+    table{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        align-content: center;
+        border: 1px solid black;
+    }
+    thead{
+        font-weight:900;
+        font-size: 1.5vw;
+    }
+    td{
+        width: auto;
+        border: 1px solid black;
+        text-align: center;
+        height: 4vw;
+        font-weight: bold;
+   }
+    #tq{
+        text-decoration: underline;
+    }
+    #sc{
+        width: 100% !important;
+        margin: 0%;
+        color: #7e7e7e;
+            }
+            #le{
+                width: 90vw;
+                margin: 0;
+                color: #fff;
+            }
+    #delq,#addq{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        justify-content: center;
+    }
 </style>
 
-<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: green;height: 100%;">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:white;position:fixed;">
+<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;height:auto;color:#fff">
+    <div style="background-color: #7e7e7e;height: auto;color:#fff !important">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -191,18 +243,32 @@ if (!$conn) {
                 <li onclick="lo()">Sign Out</li>
             </ul>
         </div><br><br> 
+        <center><section style="width:100vw;margin:0vw;margin-top:4vw;font-size:2vw;">Welcome to Online Examination System&nbsp;<?php echo $dbname ?></section></center>
         <section class="dash" style="margin: 5vw;width: 90vw;">
             <center><h1 style="font-weight:bolder;font-size:3vw">Dashbord</h1></center>
-            <button onclick="addquiz()">Add Quiz</button>
+           <center> <button onclick="addquiz()">Add Quiz</button>            <button onclick="delquiz()">Delete Quiz</button></center>
+           <center>
             <section id="addq" style="display:none;">
-                <form style="margin: 5vw;width: 30vw" method="post">
-                    <center>
+                <form style="width: 30vw" method="post">
+                  
+                        <h1>Add quiz</h1>
                         <label for="quizname">Quiz name</label><br><br>
                         <input type="text" name="quizname" placeholder="enter quiz name" required><br><br>
-                        <input type="submit" name="submit" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: rgb(77, 77, 236);">
-                    </center>
+                        <input type="submit" name="submit" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
+                  
                 </form>
-            </section>
+            </section>  </center><center>
+            <section id="delq" style="display:none;">
+                <form style="margin: 1vw;width: 30vw" method="post">
+                    
+                        <h1>Delete Quiz</h1>
+                        <label for="quizid">Quiz Id</label><br><br>
+                        <input type="number" name="quizid" placeholder="enter quiz id" required><br><br>
+                        <input type="submit" name="submit1" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
+                    
+                </form>
+            </section></center>
+
             <section id="ans" style="display: none;">
             <form style="margin: 5vw;width: 30vw" method="post">
                     <center>
@@ -214,12 +280,12 @@ if (!$conn) {
                         <input type="text" name="op3" placeholder="option3" required><br><br>
                         <input type="text" name="ans" placeholder="answer" required><br><br>
                         </div>
-                        <input type="submit" name="submit" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: rgb(77, 77, 236);">
+                        <input type="submit" name="submit" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     </center>
                 </form>
             </section>
         </section>
-        <section class="prof" id="prof" style="display: none;color:white;">
+        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
             <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
             <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
             <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -236,7 +302,7 @@ if (!$conn) {
             if($res)
             {
                 echo "<h1>List of Quiz added by U</h1>";
-                echo "<table><thead><tr><td>Quiz id</td>&nbsp;<td>Quiz Title</td><td>Created on</td></tr></thead>";
+                echo "<table id=\"sc\"><thead><tr><td>Quiz id</td>&nbsp;<td>Quiz Title</td><td>Created on</td></tr></thead>";
                 while ($row = mysqli_fetch_assoc($res)) {                
                     echo "<tr><td>".$row["quizid"]."</td><td>".$row["quizname"]."</td><td>".$row["date_created"]."</td></tr>"; 
                 }
@@ -244,10 +310,28 @@ if (!$conn) {
             }
             ?>
         </section>
+        <section style="color:#fff !important">
+            <?php
+            $sql="select quizname,s.name,score,totalscore from student s,staff st,score sc,quiz q where q.quizid=sc.quizid and s.mail=sc.mail and q.mail='{$username1}'";
+            $res=mysqli_query($conn,$sql);
+            if($res)
+            {
+                echo "<center><h1 style=\"font-size: 3vw\">Leaderboard</h1></center>";
+                echo "<table id=\"le\"><thead><tr><td>Quiz Title</td>&nbsp;<td>Student name</td><td>score obtained</td><td>Max Score</td></tr></thead>";
+                while ($row = mysqli_fetch_assoc($res)) {                
+                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["name"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td></tr>"; 
+                }
+                echo "</table>";
+            }
+            else{
+                echo mysqli_error($conn);
+            }
+            ?>
+        </section>
     </div>
 </body>
 <?php
-echo '<script>alert("Welcome to Online Examination System ' . $_SESSION['name'] . '");' .
+echo '<script>' .
     "function prof(){" .
     "document.getElementById(\"prof\").style=\"display: block !important;\";" .
     "document.getElementById(\"score\").style=\"display: none !important;\";" .
@@ -268,7 +352,12 @@ echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/i
     "}" .
     "function addquiz(){" .
     "document.getElementById(\"addq\").style=\"display: initial;\";" .
+    "document.getElementById(\"delq\").style=\"display: none;\";" .
     "}" .
+    "function delquiz(){" .
+        "document.getElementById(\"delq\").style=\"display: initial;\";" .
+        "document.getElementById(\"addq\").style=\"display: none;\";" .
+        "}" .
 
     "</script>";
 ?>

@@ -8,6 +8,7 @@
 </head>
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 $conn = mysqli_connect('localhost', 'root', '', 'project');
 if (!$conn) {
     echo "<script>alert(\"Database error retry after some time !\")</script>";
@@ -24,25 +25,26 @@ if (!$conn) {
     }
 
     .navbar {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color:#fff !important;
+        font-size: 1.5vw;
     }
 
     .navbar>ul>li:hover {
-        color: black;
+        color: #7e7e7e7;
         text-decoration: underline;
         font-weight: bold;
 
     }
 
     .navbar>ul>li>a:hover {
-        color: black;
+        color: #7e7e7e7;
         text-decoration: underline;
         font-weight: bold !important;
     }
 
     a {
         text-decoration: none;
-        color: white;
+        color: #7e7e7e;
     }
     .prof,#score{
         top: 3vw;
@@ -50,14 +52,14 @@ if (!$conn) {
             width: 50vw !important;
             margin-left: 25vw !important;
             margin-right: 25vw !important;
-            background-color: rgba(26, 201, 134, 0.801) !important;
+            background-color: #fff !important;
             display: none !important;
             border-radius: 10px;
             margin-top: 2vw;
             z-index: 1;
             padding: 1vw;
             padding-left: 2vw;
-            color: white;
+            color: #7e7e7e;
         }
     @media screen and (max-width: 450px) {
         .navbar {
@@ -84,15 +86,44 @@ if (!$conn) {
             margin: 0 !important;
         }
         p{
-            color:white !important;
+            color:#7e7e7e !important;
         }
         
     }
+    #btn{
+        height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;
+    }
+    table{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        align-content: center;
+        border: 1px solid black;
+    }
+    thead{
+        font-weight:900;
+        font-size: 1.5vw;
+    }
+    td{
+        width: auto;
+        border: 1px solid black;
+        text-align: center;
+        height: 4vw;
+        font-weight: bold;
+   }
+    #tq{
+        text-decoration: underline;
+    }
+    #sc{
+        width: 100% !important;
+        margin: 0%;
+        color: #7e7e7e;
+            }
 </style>
 
-<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: green;height: 100%;">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:white;position:fixed;">
+<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;color: #fff">
+    <div style="background-color: #7e7e7e;height: 100%;">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -119,7 +150,7 @@ if (!$conn) {
             }
         }
         ?>
-        <section style="margin-top: 3vw"> 
+        <section style="margin-top: 4vw;width:80vw;margin-left:10vw;margin-right:10vw"> 
         <?php 
         if(isset($_GET["qid"])){
         $qid=$_GET["qid"];
@@ -127,29 +158,52 @@ if (!$conn) {
             $res=mysqli_query($conn,$sql);
             if($res)
             {
+                $count=mysqli_num_rows($res);
                 if(mysqli_num_rows($res)==0)
                 {
                     echo "No questions found under this quiz please come later";
                 }else{
                 $i=1;
+                $j=0;
+                echo "<form method=\"POST\">";
                 while ($row = mysqli_fetch_assoc($res)) { 
                     echo $i.". ".$row["qs"]."<br>";
-                    echo "<input type=\"radio\" name=\"ans\">".$row["op1"]."<br>";
-                    echo "<input type=\"radio\" name=\"ans\">".$row["op2"]."<br>";               
-                    echo "<input type=\"radio\" name=\"ans\">".$row["op3"]."<br>";               
-                    echo "<input type=\"radio\" name=\"ans\">".$row["answer"]."<br>";  
+                    echo "<input type=\"radio\" value=\"".$j."\" name=\"ans".$i.$j."\">".$row["op1"]."<br>";
+                    echo "<input type=\"radio\" value=\"".($j+1)."\" name=\"ans".$i.$j."\">".$row["op2"]."<br>";               
+                    echo "<input type=\"radio\" value=\"".($j+2)."\"name=\"ans".$i.$j."\">".$row["op3"]."<br>";               
+                    echo "<input type=\"radio\"value=\"".($j+3)."\" name=\"ans".$i.$j."\">".$row["answer"]."<br><br>";  
                     $i++;                            
                 }
+                echo "<input id=\"btn\" type=\"submit\" name=\"submit\" value=\"submit\"><br><br><br>";
+                echo "</form><br><br>";
             }
             }
             else
             {
                 echo "error".mysqli_error($conn).".";
             }
+            if(isset($_POST["submit"])){
+                global $score;
+                for($i=1;$i<=$count;$i++)
+                {
+                    if(isset($_POST["ans".$i.$j]) && $_POST["ans".$i.$j]==3){
+                        $score++;
+                    }
+                }
+                echo "<script>alert(\"u scored ".$score." out of ".$count."\");</script>";
+                $sql ="insert into score(score,mail,quizid,totalscore) values('$score','$dbmail','$qid','$count');";
+                $res=mysqli_query($conn,$sql);
+                if($res)
+                {
+                    echo '<script>history.pushState({}, "", "");</script>';
+                    echo "<script>window.location.replace(\"homestud.php\");</script>";
+                }else{
+                    echo "<script>alert(\"error occured updating score in database".mysqli_error($conn)."\");</script>";
+                }
         }
-            ?>
+     } ?>
         </section>
-        <section class="prof" id="prof" style="display: none;color:white;">
+        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
                 <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
                 <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
                 <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -160,6 +214,23 @@ if (!$conn) {
                 <p><b>Dept.&nbsp;:&nbsp;<?php echo $dbdept ?></b></p>
         </section>
         <section id="score" style="display:none;">
+        <?php 
+            $sql ="select * from score,quiz where score.mail='{$username1}' and score.quizid=quiz.quizid";
+            $res=mysqli_query($conn,$sql);
+            if($res)
+            {
+                echo "<h1>Scoreboard</h1>";
+                echo "<table id=\"sc\"><thead><tr><td>Quiz Title</td><td>Score Obtained</td><td>Total Score</td></tr></thead>";
+                while ($row = mysqli_fetch_assoc($res)) {                
+                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td></tr>"; 
+                }
+                echo "</table>";
+            }
+            else{
+                echo " ".mysqli_error($conn);
+            }
+            ?>
+            </section>
             </section>
     </div>
 </body>
@@ -184,5 +255,4 @@ echo '<script>'.
 echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");".
 "}</script>";
 ?>
-
 </html>

@@ -94,12 +94,12 @@ if (isset($_POST['staffsu'])) {
         font-family: 'Courier New', Courier, monospace;
         font-weight: bolder;
         outline: none;
-        background-color: rgb(52, 209, 52);
+        background-color: lightblue;
         border: none;
     }
 
     button:active {
-        background-color: blueviolet;
+        background-color: lightblue;
     }
 
     button:focus {
@@ -135,10 +135,13 @@ if (isset($_POST['staffsu'])) {
         width: 20vw;
         height: 2vw;
     }
-
+    a{
+        color: #7e7e7e;
+        margin: 2vw;
+    }
     .su {
         width: 10vw !important;
-        background-color: rgb(77, 77, 236);
+        background-color: #fff;
         margin-bottom: 1vw;
     }
 
@@ -155,10 +158,10 @@ if (isset($_POST['staffsu'])) {
     }
 </style>
 
-<body style="margin: 0;padding: 0;outline: none;">
-    <div style="font-family: 'Courier New', Courier, monospace;margin: 0;padding: 0;background-color: rgba(77, 182, 224, 0.74);height: auto;width: 100%;padding-bottom: 5vw;background-image: url(images/rakesh.png);height: auto !important;">
+<body style="margin: 0;padding: 0;outline: none;height: 100%;min-height: 100vw;color: #7e7e7e !important">
+    <div style="font-family: 'Courier New', Courier, monospace;margin: 0;padding: 0;background-color: #fff;height: 100%;width: 100%;padding-bottom: 5vw;background-image: url(images/rakesh.png);height: 100% !important;background-repeat: no-repeat;background-size:cover;">
         <center>
-            <h1 style="text-transform: uppercase;padding: 2vw;background-color: rgba(26, 201, 134, 0.801);color: white">ONLINE
+            <h1 style="text-transform: uppercase;padding: 2vw;background-color: #fff;color: #7e7e7e">ONLINE
                 Examination System</h1>
         </center>
         <div class="seluser">
@@ -167,7 +170,7 @@ if (isset($_POST['staffsu'])) {
         <div class="stud" id="stud">
             <center>
 
-                <form name="student" method="POST" style="width: 80vw;background-color: rgba(63, 221, 63, 0.493);"><br>
+                <form name="student" method="POST" style="width: 80vw;background-color:#fff;"><br>
                     <h1 class="formname">Sign-Up as Student</h1><br><br>
                     <label for="name1">NAME</label><br>
                     <input type="text" name="name1" required><br><br>
@@ -201,7 +204,7 @@ if (isset($_POST['staffsu'])) {
         <div class="staff" id="staff">
             <center>
 
-                <form name="staffSIGNUP" method="POST" style="width: 80vw;background-color: rgba(63, 221, 63, 0.493);"><br>
+                <form name="staffSIGNUP" method="POST" style="width: 80vw;background-color:#fff;"><br>
 
                     <h1 class="formname">Sign-Up as Staff</h1><br><br><label for="name">NAME</label><br>
                     <input type="text" name="name2" required><br><br>

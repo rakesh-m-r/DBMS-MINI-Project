@@ -68,6 +68,20 @@ if (!$conn) {
 }
 ?>
 <style>
+    table{
+        border: 1px solid black;
+        width: 100% !important;
+        font-weight: bolder;
+        font-size: 2vw;
+        color: #7e7e7e;
+    }
+    td{
+        border: 1px solid black;
+        width: 20%;
+        font-weight: bolder;
+        font-size: 2vw;
+
+    }
     li {
         margin: 1.5vw;
     }
@@ -78,7 +92,8 @@ if (!$conn) {
     }
 
     .navbar {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: #fff!important;
+        font-size: 1.5vw;
     }
 
     .navbar>ul>li:hover {
@@ -96,22 +111,24 @@ if (!$conn) {
 
     a {
         text-decoration: none;
-        color: white;
+        color: #7e7e7e;
     }
 
     .prof,
     #score {
+        top: 3vw;
+        position: absolute;
         width: 50vw !important;
         margin-left: 25vw !important;
         margin-right: 25vw !important;
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: #fff!important;
         display: none !important;
         border-radius: 10px;
         margin-top: 2vw;
         z-index: 1;
         padding: 1vw;
         padding-left: 2vw;
-        color: white;
+        color: #7e7e7e;
     }
 
     button {
@@ -122,7 +139,7 @@ if (!$conn) {
         outline: none;
         border: none;
         border-radius: 10px;
-        margin: 2vw;
+        margin: 5vw;
     }
 
     input {
@@ -145,7 +162,7 @@ if (!$conn) {
     }
 
     button:hover {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: blueviolet !important;
     }
 
     .bg {
@@ -178,15 +195,46 @@ if (!$conn) {
         }
 
         p {
-            color: white !important;
+            color: #7e7e7e !important;
         }
 
     }
+    table{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        align-content: center;
+        border: 1px solid black;
+    }
+    thead{
+        font-weight:900;
+        font-size: 1.5vw;
+    }
+    td{
+        width: auto;
+        border: 1px solid black;
+        text-align: center;
+        height: 4vw;
+        font-weight: bold;
+   }
+    #tq{
+        text-decoration: underline;
+    }
+    #sc{
+        width: 100% !important;
+        margin: 0%;
+        color: #7e7e7e;
+            }
+            #le{
+                width: 90vw;
+                margin: 0;
+                color: #fff;
+            }
 </style>
 
-<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: green;height: 100%;">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:white;position:fixed;">
+<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;color:#fff !important">
+    <div style="background-color: #7e7e7e;height: 100%;">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -213,13 +261,13 @@ if (!$conn) {
                             <label for="ans">Answer &nbsp;</label>
                             <input type="text" name="ans" placeholder="answer" required><br><br>
                         </div>
-                        <input type="submit" name="submit" value="add 1 more question" style="height: 3vw;width: auto;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: rgb(77, 77, 236);">
-                        <input type="submit" name="submit1" value="Done" style="height: 3vw;width: auto;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: rgb(77, 77, 236);">
+                        <input type="submit" name="submit" value="add 1 more question" style="height: 3vw;width: auto;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
+                        <input type="submit" name="submit1" value="Done" style="height: 3vw;width: auto;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     </form>
                 </center>
             </section>
         </section>
-        <section class="prof" id="prof" style="display: none;color:white;">
+        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
             <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
             <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
             <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -230,6 +278,19 @@ if (!$conn) {
             <p><b>Dept.&nbsp;:&nbsp;<?php echo $dbdept ?></b></p>
         </section>
         <section id="score" style="display:none;">
+        <?php 
+            $sql ="select * from quiz where mail='{$username1}'";
+            $res=mysqli_query($conn,$sql);
+            if($res)
+            {
+                echo "<h1>List of Quiz added by U</h1>";
+                echo "<table id=\"sc\"><thead><tr><td>Quiz id</td>&nbsp;<td>Quiz Title</td><td>Created on</td></tr></thead>";
+                while ($row = mysqli_fetch_assoc($res)) {                
+                    echo "<tr><td>".$row["quizid"]."</td><td>".$row["quizname"]."</td><td>".$row["date_created"]."</td></tr>"; 
+                }
+                echo "</table>";
+            }
+            ?>
         </section>
     </div>
 </body>

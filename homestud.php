@@ -16,33 +16,37 @@ if (!$conn) {
 <style>
     li {
         margin: 1.5vw;
+        font-size: 1.5vw !important;
+
     }
 
     ul {
         list-style: none;
         width: auto !important;
+        font-weight: 2vw !important;
     }
 
     .navbar {
-        background-color: rgba(26, 201, 134, 0.801) !important;
+        background-color: white !important;
+        font-size: 1.5vw !important;
     }
 
     .navbar>ul>li:hover {
-        color: black;
+        color: #7e7e7e;
         text-decoration: underline;
         font-weight: bold;
 
     }
 
     .navbar>ul>li>a:hover {
-        color: black;
+        color: #7e7e7e;
         text-decoration: underline;
         font-weight: bold !important;
     }
 
     a {
         text-decoration: none;
-        color: white;
+        color: #fff;
     }
     .prof,#score{
         top: 3vw;
@@ -50,14 +54,14 @@ if (!$conn) {
             width: 50vw !important;
             margin-left: 25vw !important;
             margin-right: 25vw !important;
-            background-color: rgba(26, 201, 134, 0.801) !important;
+            background-color: #fff !important;
             display: none !important;
             border-radius: 10px;
             margin-top: 2vw;
             z-index: 1;
             padding: 1vw;
             padding-left: 2vw;
-            color: white;
+            color: #7e7e7e;
         }
     @media screen and (max-width: 450px) {
         .navbar {
@@ -84,15 +88,41 @@ if (!$conn) {
             margin: 0 !important;
         }
         p{
-            color:white !important;
+            color:#7e7e7e !important;
         }
         
     }
+    table{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        align-content: center;
+        border: 1px solid black;
+    }
+    thead{
+        font-weight:900;
+        font-size: 1.5vw;
+    }
+    td{
+        width: auto;
+        border: 1px solid black;
+        text-align: center;
+        height: 4vw;
+        font-weight: bold;
+   }
+    #tq{
+        text-decoration: underline;
+    }
+    #sc{
+        width: 100% !important;
+        margin: 0%;
+        color: #7e7e7e;
+            }
 </style>
 
-<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: green;height: 100%;">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:white;position:fixed;">
+<body style="color: #fff !important;font-weight:bolder;margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
+    <div style="background-color: #7e7e7e;height: 100%;">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -119,22 +149,23 @@ if (!$conn) {
             }
         }
         ?>
-        <section>
+        <center><section style="width:100vw;margin:0vw;margin-top:4vw;font-size:2vw;">Welcome to Online Examination System&nbsp;<?php echo $dbname ?></section></center>
+        <section style="color:#fff !important">
         <?php 
             $sql ="select * from quiz";
             $res=mysqli_query($conn,$sql);
             if($res)
             {
-                echo "<h1>Take any Quiz</h1>";
-                echo "<table><thead><tr><td>Quiz Title</td><td>Created on</td><td>Created By</td><td></td></tr></thead>";
+                echo "<h1 style=\"margin-left: 5vw;\">Take any Quiz</h1>";
+                echo "<center><table><thead><tr><td>Quiz Title</td><td>Created on</td><td>Created By</td><td>  </td></tr></thead>";
                 while ($row = mysqli_fetch_assoc($res)) {                
-                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["date_created"]."</td><td>".$row["mail"]."</td><td><a href='takeq.php?qid=".$row['quizid']."'>Take Quiz</button></tr>"; 
+                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["date_created"]."</td><td>".$row["mail"]."</td><td><a id=\"tq\" href='takeq.php?qid=".$row['quizid']."'>Take Quiz</button></tr>"; 
                 }
-                echo "</table>";
+                echo "</table></center>";
             }
             ?>
         </section>
-        <section class="prof" id="prof" style="display: none;color:white;">
+        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
                 <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
                 <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
                 <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -145,11 +176,27 @@ if (!$conn) {
                 <p><b>Dept.&nbsp;:&nbsp;<?php echo $dbdept ?></b></p>
         </section>
         <section id="score" style="display:none;">
+        <?php 
+            $sql ="select * from score,quiz where score.mail='{$username1}' and score.quizid=quiz.quizid";
+            $res=mysqli_query($conn,$sql);
+            if($res)
+            {
+                echo "<h1>Scoreboard</h1>";
+                echo "<table id=\"sc\"><thead><tr><td>Quiz Title</td><td>Score Obtained</td><td>Total Score</td></tr></thead>";
+                while ($row = mysqli_fetch_assoc($res)) {                
+                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td></tr>"; 
+                }
+                echo "</table>";
+            }
+            else{
+                echo " ".mysqli_error($conn);
+            }
+            ?>
             </section>
     </div>
 </body>
 <?php
-echo '<script>alert("Welcome to Online Examination System ' . $_SESSION['name'] . '");'.
+echo '<script>'.
 "function prof(){".
 "document.getElementById(\"prof\").style=\"display: block !important;\";".
 "document.getElementById(\"score\").style=\"display: none !important;\";".
