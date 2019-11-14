@@ -28,15 +28,8 @@ if (!$conn) {
             $dbdept = $row['dept'];
         }
     }
-    $qname = $_SESSION['qname'];
-    $sql = "select quizid from quiz where quizname='{$qname}'";
-    $res =   mysqli_query($conn, $sql);
-    if ($res == true) {
-        global $qid;
-        while ($row = mysqli_fetch_array($res)) {
-            $qid = $row['quizid'];
-        }
-    }
+
+    $qid=$_GET["qid"];
     if (isset($_POST['submit'])) {
         $qs = $_POST["qs"];
         $op1 = $_POST["op1"];

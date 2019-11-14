@@ -8,6 +8,7 @@
 </head>
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 $conn = mysqli_connect('localhost', 'root', '', 'project');
 if (!$conn) {
     echo "<script>alert(\"Database error retry after some time !\")</script>";
@@ -16,37 +17,34 @@ if (!$conn) {
 <style>
     li {
         margin: 1.5vw;
-        font-size: 1.5vw !important;
-
     }
 
     ul {
         list-style: none;
         width: auto !important;
-        font-weight: 2vw !important;
     }
 
     .navbar {
-        background-color: white !important;
-        font-size: 1.5vw !important;
+        background-color:#fff !important;
+        font-size: 1.5vw;
     }
 
     .navbar>ul>li:hover {
-        color: #7e7e7e;
+        color: #7e7e7e7;
         text-decoration: underline;
         font-weight: bold;
 
     }
 
     .navbar>ul>li>a:hover {
-        color: #7e7e7e;
+        color: #7e7e7e7;
         text-decoration: underline;
         font-weight: bold !important;
     }
 
     a {
         text-decoration: none;
-        color: #fff;
+        color: #7e7e7e;
     }
     .prof,#score{
         top: 3vw;
@@ -92,6 +90,9 @@ if (!$conn) {
         }
         
     }
+    #btn{
+        height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;
+    }
     table{
         width: 90vw;
         margin-left: 5vw;
@@ -120,8 +121,8 @@ if (!$conn) {
             }
 </style>
 
-<body style="color: #fff !important;font-weight:bolder;margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: #7e7e7e;height: 100%;">
+<body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;color: #fff;height:auto;">
+    <div style="background-color: #7e7e7e;height: auto;">
         <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
@@ -149,21 +150,42 @@ if (!$conn) {
             }
         }
         ?>
-        <center><section style="width:100vw;margin:0vw;margin-top:4vw;font-size:2vw;">Welcome to Online Examination System&nbsp;<?php echo $dbname ?></section></center>
-        <section style="color:#fff !important">
+        <section style="margin-top: 4vw;width:80vw;margin-left:10vw;margin-right:10vw"> 
         <?php 
-            $sql ="select * from quiz";
+        if(isset($_GET["qid"])){
+        $qid=$_GET["qid"];
+            $sql ="select * from questions where quizid='{$qid}'";
             $res=mysqli_query($conn,$sql);
             if($res)
             {
-                echo "<h1 style=\"margin-left: 5vw;\">Take any Quiz</h1>";
-                echo "<center><table><thead><tr><td>Quiz Title</td><td>Created on</td><td>Created By</td><td>  </td></tr></thead>";
-                while ($row = mysqli_fetch_assoc($res)) {                
-                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["date_created"]."</td><td>".$row["mail"]."</td><td><a id=\"tq\" href='takeq.php?qid=".$row['quizid']."'>Take Quiz</button></tr>"; 
+                $count=mysqli_num_rows($res);
+                if(mysqli_num_rows($res)==0)
+                {
+                    echo "No questions found under this quiz please come later";
+                }else{
+                $i=1;
+                $j=0;
+                echo "<form method=\"POST\">";
+                echo "<input id=\"btn\" type=\"submit\" name=\"submit\" value=\"Add Questions\"><br><br><br>";
+                while ($row = mysqli_fetch_assoc($res)) { 
+                    echo $i.". ".$row["qs"]."<br>";
+                    echo "<input type=\"radio\" value=\"".$j."\" name=\"ans".$i.$j."\">".$row["op1"]."<br>";
+                    echo "<input type=\"radio\" value=\"".($j+1)."\" name=\"ans".$i.$j."\">".$row["op2"]."<br>";               
+                    echo "<input type=\"radio\" value=\"".($j+2)."\"name=\"ans".$i.$j."\">".$row["op3"]."<br>";               
+                    echo "<input type=\"radio\"value=\"".($j+3)."\" name=\"ans".$i.$j."\">".$row["answer"]."<br><br>";  
+                    $i++;                            
                 }
-                echo "</table></center>";
+                echo "</form><br><br>";
             }
-            ?>
+            }
+            else
+            {
+                echo "error".mysqli_error($conn).".";
+            }
+            if(isset($_POST["submit"])){
+                echo "<script>window.location.replace(\"addq.php?qid=".$qid."\")</script>";
+            }
+     } ?>
         </section>
         <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
                 <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
@@ -193,6 +215,7 @@ if (!$conn) {
             }
             ?>
             </section>
+            </section>
     </div>
     <?php require("footer.php");?>
 
@@ -218,5 +241,4 @@ echo '<script>'.
 echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");".
 "}</script>";
 ?>
-
 </html>

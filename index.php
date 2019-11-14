@@ -121,6 +121,7 @@ if (isset($_POST['login'])) {
     </div>
     </center>
     </div>
+    <?php require("footer.php");?>
 </body>
 
 </html>

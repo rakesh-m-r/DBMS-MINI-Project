@@ -56,6 +56,17 @@ if (!$conn) {
 
         }
     }
+    if (isset($_POST['submit2'])) {
+        $qid1 =$_POST['quizid'];
+        $sql1 = "select quizid from quiz where quizid='{$qid1}'";
+        $res1 = mysqli_query($conn, $sql1);
+        if ($res1 == true) {
+            echo "<script>window.location.replace(\"viewq.php?qid=".$qid1."\");</script>";
+        } else {
+            echo "<script>alert(\"Unknown error occured during viweing of quiz\");</script>";
+
+        }
+    }
 }
 ?>
 <style>
@@ -246,7 +257,7 @@ if (!$conn) {
         <center><section style="width:100vw;margin:0vw;margin-top:4vw;font-size:2vw;">Welcome to Online Examination System&nbsp;<?php echo $dbname ?></section></center>
         <section class="dash" style="margin: 5vw;width: 90vw;">
             <center><h1 style="font-weight:bolder;font-size:3vw">Dashbord</h1></center>
-           <center> <button onclick="addquiz()">Add Quiz</button>            <button onclick="delquiz()">Delete Quiz</button></center>
+           <center> <button onclick="addquiz()">Add Quiz</button>            <button onclick="delquiz()">Delete Quiz</button>         <button onclick="viewq()">View Quiz</button></center>
            <center>
             <section id="addq" style="display:none;">
                 <form style="width: 30vw" method="post">
@@ -265,6 +276,17 @@ if (!$conn) {
                         <label for="quizid">Quiz Id</label><br><br>
                         <input type="number" name="quizid" placeholder="enter quiz id" required><br><br>
                         <input type="submit" name="submit1" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
+                    
+                </form>
+            </section></center>
+            <center>
+            <section id="viewq" style="display:none;">
+                <form style="margin: 1vw;width: 30vw" method="post">
+                    
+                        <h1>View Quiz</h1>
+                        <label for="quizid">Quiz Id</label><br><br>
+                        <input type="number" name="quizid" placeholder="enter quiz id" required><br><br>
+                        <input type="submit" name="submit2" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     
                 </form>
             </section></center>
@@ -312,7 +334,7 @@ if (!$conn) {
         </section>
         <section style="color:#fff !important">
             <?php
-            $sql="select quizname,s.name,score,totalscore from student s,staff st,score sc,quiz q where q.quizid=sc.quizid and s.mail=sc.mail and q.mail='{$username1}'";
+            $sql="select quizname,s.name,score,totalscore from student s,staff st,score sc,quiz q where q.quizid=sc.quizid and s.mail=sc.mail and q.mail='{$username1}' ORDER BY score DESC";
             $res=mysqli_query($conn,$sql);
             if($res)
             {
@@ -329,6 +351,8 @@ if (!$conn) {
             ?>
         </section>
     </div>
+    <?php require("footer.php");?>
+
 </body>
 <?php
 echo '<script>' .
@@ -353,11 +377,19 @@ echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/i
     "function addquiz(){" .
     "document.getElementById(\"addq\").style=\"display: initial;\";" .
     "document.getElementById(\"delq\").style=\"display: none;\";" .
+    "document.getElementById(\"viewq\").style=\"display: none;\";" .
+
     "}" .
     "function delquiz(){" .
         "document.getElementById(\"delq\").style=\"display: initial;\";" .
         "document.getElementById(\"addq\").style=\"display: none;\";" .
+        "document.getElementById(\"viewq\").style=\"display: none;\";" .
         "}" .
+        "function viewq(){" .
+            "document.getElementById(\"viewq\").style=\"display: initial;\";" .
+            "document.getElementById(\"delq\").style=\"display: none;\";" .
+            "document.getElementById(\"addq\").style=\"display: none;\";" .
+            "}" .
 
     "</script>";
 ?>

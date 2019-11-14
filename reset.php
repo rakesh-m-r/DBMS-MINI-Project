@@ -94,6 +94,8 @@
     </div>
     </center>
     </div>
+    <?php require("footer.php");?>
+
 </body>
 <?php
 if (isset($_POST['submit'])) {

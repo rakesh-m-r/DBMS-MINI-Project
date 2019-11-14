@@ -233,6 +233,8 @@ if (!$conn) {
             </section>
             </section>
     </div>
+    <?php require("footer.php");?>
+
 </body>
 <?php
 echo '<script>'.

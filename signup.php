@@ -80,7 +80,7 @@ if (isset($_POST['staffsu'])) {
         } else {
             echo "<script>
                 alert(' Password should be same');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/singup.php\");</script>";
+                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/signup.php\");</script>";
             session_destroy();
         }
     }
@@ -235,6 +235,8 @@ if (isset($_POST['staffsu'])) {
         </div>
         <center><a href="index.php">Cancel</a></center>
     </div>
+    <?php require("footer.php");?>
+
 </body>
 <script>
     function stud() {
