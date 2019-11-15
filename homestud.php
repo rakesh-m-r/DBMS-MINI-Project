@@ -35,6 +35,7 @@ if (!$conn) {
         color: #7e7e7e;
         text-decoration: underline;
         font-weight: bold;
+        cursor: default;
 
     }
 
@@ -121,7 +122,7 @@ if (!$conn) {
 </style>
 
 <body style="color: #fff !important;font-weight:bolder;margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: #7e7e7e;height: 100%;">
+    <div style="background-color: #7e7e7e;height: auto;">
         <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
@@ -191,9 +192,28 @@ if (!$conn) {
             else{
                 echo " ".mysqli_error($conn);
             }
-            ?>
+            ?><br><br><br>
             </section>
+            <section style="color:#fff !important">
+            <?php
+            $sql="call leaderboard;";
+            $res=mysqli_query($conn,$sql);
+            if($res)
+            {
+                echo "<center><h1 style=\"font-size: 3vw\">Leaderboard</h1></center>";
+                echo "<table id=\"le\"><thead><tr><td>Quiz Title</td><td>Score</td><td>Total Score</td><td>Student name</td><td>Student Mail ID</td></tr></thead>";
+                while ($row = mysqli_fetch_assoc($res)) {                
+                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td><td>".$row["name"]."</td><td>".$row["mail"]."</td></tr>"; 
+                }
+                echo "</table>";
+            }
+            else{
+                echo mysqli_error($conn);
+            }
+            ?>
+        </section>
     </div>
+
     <?php require("footer.php");?>
 
 </body>
