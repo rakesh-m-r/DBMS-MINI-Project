@@ -59,10 +59,10 @@
 </style>
 
 <?php global $message;?>
-<body style="margin:0;height: 100%;outline: none;color: #7e7e7e !important;">
+<body style="margin:0;height: 100%;outline: none;color: #042A38 !important;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: auto;padding-bottom: 5vw;">
         <center>
-            <h1 style=" color:#7e7e7e;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
+            <h1 style=" color:#042A38;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>
@@ -82,7 +82,7 @@
                             <label for="pass1" style="text-transform: uppercase;">Password</label><br><br>
                             <input type="password" name="pass1" placeholder="******" class="inp" required>
                             <br><br>
-                            <label for="cpass1" style="text-transform: uppercase;">Password</label><br><br>
+                            <label for="cpass1" style="text-transform: uppercase;">Confirm Password</label><br><br>
                             <input type="password" name="cpass1" placeholder="******" class="inp" required>
                             <br><br>
                             <input name="submit" class="sub" type="submit" value="Get the Code" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
                     $mail->Subject = 'Reset your Online Examination system password';
 
 
-                    $mail->Body = 'hello ' . $dbname . '<br>here is your security code reset the password ' . $otp . '<br>';
+                    $mail->Body = '<center><div style="width:100%;background-color:#042A38;color: #fff;height:auto; "><h1>Hello ' . $dbname . '<br></h1><br>here is your security code to reset the password <h1>' . $otp . '</h1><br>  don\'t share security code with any one. <br><br><br>Thank You<br>Online Examination System<br><br><a href="mailto:osesvit2021@gmail.com">Contact Us</a></div></center>';
 
 
                     if (!$mail->send()) {

@@ -30,25 +30,25 @@ if (!$conn) {
     }
 
     .navbar>ul>li:hover {
-        color: #7e7e7e7;
+        color: #042A387;
         text-decoration: underline;
         font-weight: bold;
 
     }
 
     .navbar>ul>li>a:hover {
-        color: #7e7e7e7;
+        color: #042A387;
         text-decoration: underline;
         font-weight: bold !important;
     }
 
     a {
         text-decoration: none;
-        color: #7e7e7e;
+        color: #042A38;
     }
     .prof,#score{
         top: 3vw;
-        position: absolute;
+        position: fixed;
             width: 50vw !important;
             margin-left: 25vw !important;
             margin-right: 25vw !important;
@@ -59,7 +59,10 @@ if (!$conn) {
             z-index: 1;
             padding: 1vw;
             padding-left: 2vw;
-            color: #7e7e7e;
+            color: #042A38;
+        }
+        input{
+            margin:1vw;
         }
     @media screen and (max-width: 450px) {
         .navbar {
@@ -86,7 +89,7 @@ if (!$conn) {
             margin: 0 !important;
         }
         p{
-            color:#7e7e7e !important;
+            color:#042A38 !important;
         }
         
     }
@@ -117,13 +120,13 @@ if (!$conn) {
     #sc{
         width: 100% !important;
         margin: 0%;
-        color: #7e7e7e;
+        color: #042A38;
             }
 </style>
 
 <body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;color: #fff">
-    <div style="background-color: #7e7e7e;height: 100%;">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
+    <div style="background-color: #042A38;height: auto;">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#042A38;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -203,7 +206,7 @@ if (!$conn) {
         }
      } ?>
         </section>
-        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
+        <section class="prof" id="prof" style="display: none;color:#042A38;">
                 <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
                 <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
                 <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -254,7 +257,7 @@ echo '<script>'.
 "alert(\"Thank You for Using our Online Examination System\");";
 //session_unset();
 //session_destroy();
-echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");".
+echo "window.location.replace(\"index.php\");".
 "}</script>";
 ?>
 </html>

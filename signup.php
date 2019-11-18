@@ -29,18 +29,18 @@ if (isset($_POST['studsu'])) {
             if (mysqli_query($conn, $sql)) {
                 echo "<script>
                 alert('successful!');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
+                window.location.replace(\"index.php\");</script>";
                 session_destroy();
             } else {
                 echo "<script>
                 alert('Data enter by you alreay exist in Database please Sign In');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
+                window.location.replace(\"index.php\");</script>";
                 session_destroy();
             }
         } else {
             echo "<script>
                 alert(' Password should be same');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/singup.php\");</script>";
+                window.location.replace(\"singup.php\");</script>";
             session_destroy();
         }
     }
@@ -69,18 +69,18 @@ if (isset($_POST['staffsu'])) {
             if (mysqli_query($conn, $sql)) {
                 echo "<script>
                 alert('successful!');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
+                window.location.replace(\"index.php\");</script>";
                 session_destroy();
             } else {
                 echo "<script>
                 alert('Data enter by you alreay exist in Database please Sign In');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");</script>";
+                window.location.replace(\"index.php\");</script>";
                 session_destroy();
             }
         } else {
             echo "<script>
                 alert(' Password should be same');
-                window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/signup.php\");</script>";
+                window.location.replace(\"signup.php\");</script>";
             session_destroy();
         }
     }
@@ -100,10 +100,12 @@ if (isset($_POST['staffsu'])) {
 
     button:active {
         background-color: lightblue;
+        color: #fff;
     }
 
     button:focus {
-        background-color: blueviolet;
+        background-color: #042A38;
+        color: #fff;
     }
 
     .stud,
@@ -136,7 +138,7 @@ if (isset($_POST['staffsu'])) {
         height: 2vw;
     }
     a{
-        color: #7e7e7e;
+        color: #042A38;
         margin: 2vw;
     }
     .su {
@@ -158,10 +160,10 @@ if (isset($_POST['staffsu'])) {
     }
 </style>
 
-<body style="margin: 0;padding: 0;outline: none;height: 100%;min-height: 100vw;color: #7e7e7e !important">
-    <div style="font-family: 'Courier New', Courier, monospace;margin: 0;padding: 0;background-color: #fff;height: 100%;width: 100%;padding-bottom: 5vw;background-image: url(images/rakesh.png);height: 100% !important;background-repeat: no-repeat;background-size:cover;">
+<body style="margin: 0;padding: 0;outline: none;height: 100%;min-height: 100%;color: #042A38 !important">
+    <div style="font-family: 'Courier New', Courier, monospace;margin: 0;padding: 0;background-color: #fff;height: 100%;width: 100%;padding-bottom: 5vw;background-image: url(images/rakesh.png);height: auto !important;background-repeat: no-repeat;background-size:cover;">
         <center>
-            <h1 style="text-transform: uppercase;padding: 2vw;background-color: #fff;color: #7e7e7e">ONLINE
+            <h1 style="text-transform: uppercase;padding: 2vw;background-color: #fff;color: #042A38">ONLINE
                 Examination System</h1>
         </center>
         <div class="seluser">
@@ -233,7 +235,7 @@ if (isset($_POST['staffsu'])) {
                 </form>
             </center>
         </div>
-        <center><a href="index.php">Cancel</a></center>
+        <center><a href="index.php" style="color:#fff !important;">Cancel</a></center>
     </div>
     <?php require("footer.php");?>
 

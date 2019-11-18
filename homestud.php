@@ -32,7 +32,7 @@ if (!$conn) {
     }
 
     .navbar>ul>li:hover {
-        color: #7e7e7e;
+        color: #042A38;
         text-decoration: underline;
         font-weight: bold;
         cursor: default;
@@ -40,7 +40,7 @@ if (!$conn) {
     }
 
     .navbar>ul>li>a:hover {
-        color: #7e7e7e;
+        color: #042A38;
         text-decoration: underline;
         font-weight: bold !important;
     }
@@ -51,7 +51,7 @@ if (!$conn) {
     }
     .prof,#score{
         top: 3vw;
-        position: absolute;
+        position: fixed;
             width: 50vw !important;
             margin-left: 25vw !important;
             margin-right: 25vw !important;
@@ -62,7 +62,7 @@ if (!$conn) {
             z-index: 1;
             padding: 1vw;
             padding-left: 2vw;
-            color: #7e7e7e;
+            color: #042A38;
         }
     @media screen and (max-width: 450px) {
         .navbar {
@@ -89,7 +89,7 @@ if (!$conn) {
             margin: 0 !important;
         }
         p{
-            color:#7e7e7e !important;
+            color:#042A38 !important;
         }
         
     }
@@ -113,17 +113,23 @@ if (!$conn) {
    }
     #tq{
         text-decoration: underline;
+        border: 3px solid #fff;
+        padding: 0.5vw;
+        border-radius: 10px;
     }
     #sc{
         width: 100% !important;
         margin: 0%;
-        color: #7e7e7e;
+        color: #042A38;
+            }
+            #le{
+                margin-bottom: 2vw;
             }
 </style>
 
 <body style="color: #fff !important;font-weight:bolder;margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;">
-    <div style="background-color: #7e7e7e;height: auto;">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
+    <div style="background-color: #042A38;height: auto;">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#042A38;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -150,14 +156,14 @@ if (!$conn) {
             }
         }
         ?>
-        <center><section style="width:100vw;margin:0vw;margin-top:4vw;font-size:2vw;">Welcome to Online Examination System&nbsp;<?php echo $dbname ?></section></center>
-        <section style="color:#fff !important">
+        <center><section style="width:100vw;margin:0vw;margin-top:5vw;font-size:3vw;">Welcome to Online Examination System&nbsp;<?php echo $dbname ?></section></center>
+        <section style="color:#fff !important"><br><br><br><br><br>
         <?php 
             $sql ="select * from quiz";
             $res=mysqli_query($conn,$sql);
             if($res)
             {
-                echo "<h1 style=\"margin-left: 5vw;\">Take any Quiz</h1>";
+                echo "<center><h1 style=\"font-size:2vw;\">Take any Quiz</h1></center>";
                 echo "<center><table><thead><tr><td>Quiz Title</td><td>Created on</td><td>Created By</td><td>  </td></tr></thead>";
                 while ($row = mysqli_fetch_assoc($res)) {                
                     echo "<tr><td>".$row["quizname"]."</td><td>".$row["date_created"]."</td><td>".$row["mail"]."</td><td><a id=\"tq\" href='takeq.php?qid=".$row['quizid']."'>Take Quiz</button></tr>"; 
@@ -166,7 +172,7 @@ if (!$conn) {
             }
             ?>
         </section>
-        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
+        <section class="prof" id="prof" style="display: none;color:#042A38;">
                 <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
                 <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
                 <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -183,9 +189,9 @@ if (!$conn) {
             if($res)
             {
                 echo "<h1>Scoreboard</h1>";
-                echo "<table id=\"sc\"><thead><tr><td>Quiz Title</td><td>Score Obtained</td><td>Total Score</td></tr></thead>";
+                echo "<table id=\"sc\"><thead><tr><td>Quiz Title</td><td>Score Obtained</td><td>Total Score</td><td>Remarks</td></tr></thead>";
                 while ($row = mysqli_fetch_assoc($res)) {                
-                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td></tr>"; 
+                    echo "<tr><td>".$row["quizname"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td><td>".$row["remark"]."</tr>"; 
                 }
                 echo "</table>";
             }
@@ -205,7 +211,7 @@ if (!$conn) {
                 while ($row = mysqli_fetch_assoc($res)) {                
                     echo "<tr><td>".$row["quizname"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td><td>".$row["name"]."</td><td>".$row["mail"]."</td></tr>"; 
                 }
-                echo "</table>";
+                echo "</table><br><br><br>";
             }
             else{
                 echo mysqli_error($conn);
@@ -235,7 +241,7 @@ echo '<script>'.
 "alert(\"Thank You for Using our Online Examination System\");";
 //session_unset();
 //session_destroy();
-echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");".
+echo "window.location.replace(\"index.php\");".
 "}</script>";
 ?>
 

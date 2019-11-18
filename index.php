@@ -88,18 +88,18 @@ if (isset($_POST['login'])) {
         background-size: 100%;
     }
     a{
-        color: #7e7e7e;
+        color: #042A38;
     }
 </style>
 
-<body style="margin:0;height: 100%;ouline:none;color: #7e7e7ef !important;padding-botton:5vw;">
+<body style="margin:0;height: 100%;ouline:none;color: #042A38f !important;padding-botton:5vw;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: 100%;">
         <center>
-            <h1 style=" color:#7e7e7e;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
+            <h1 style=" color:#042A38;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>
-            <div class="login" style="color: #7e7e7e;width: 40vw;background-color: #fff;border: 2px solid black;padding: 2vw;font-weight: bolder;margin-top: 10vh;border-radius: 10px;">
+            <div class="login" style="color: #042A38;width: 40vw;background-color: #fff;border: 2px solid black;padding: 2vw;font-weight: bolder;margin-top: 10vh;border-radius: 10px;">
                 <form method="POST">
                     <div class="seluser">
                         <input type="radio" name="usertype" value="student" required>STUDENT

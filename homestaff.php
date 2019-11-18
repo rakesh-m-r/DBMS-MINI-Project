@@ -70,7 +70,7 @@ if (!$conn) {
 }
 ?>
 <style>
-    body>div{
+    #main{
         min-height: 100% !important;
     }
     table{
@@ -78,7 +78,7 @@ if (!$conn) {
         width: 100% !important;
         font-weight: bolder;
         font-size: 2vw;
-        color: #7e7e7e;
+        color: #042A38;
     }
     td{
         border: 1px solid black;
@@ -116,13 +116,13 @@ if (!$conn) {
 
     a {
         text-decoration: none;
-        color: #7e7e7e;
+        color: #042A38;
     }
 
     .prof,
     #score {
         top: 3vw;
-        position: absolute;
+        position: fixed;
         width: 50vw !important;
         margin-left: 25vw !important;
         margin-right: 25vw !important;
@@ -133,7 +133,7 @@ if (!$conn) {
         z-index: 1;
         padding: 1vw;
         padding-left: 2vw;
-        color: #7e7e7e;
+        color: #042A38;
     }
 
     button {
@@ -200,7 +200,7 @@ if (!$conn) {
         }
 
         p {
-            color: #7e7e7e !important;
+            color: #042A38 !important;
         }
 
     }
@@ -228,7 +228,7 @@ if (!$conn) {
     #sc{
         width: 100% !important;
         margin: 0%;
-        color: #7e7e7e;
+        color: #042A38;
             }
             #le{
                 width: 90vw;
@@ -241,11 +241,14 @@ if (!$conn) {
         margin-right: 5vw;
         justify-content: center;
     }
+    form{
+        display: contents;
+    }
 </style>
 
 <body style="margin: 0 !important;font-weight: bolder !important;font-family: 'Courier New', Courier, monospace;height:auto;color:#fff">
-    <div style="background-color: #7e7e7e;height: auto;color:#fff !important">
-        <div class="navbar" style="display: inline-flex;width: 100%;color:#7e7e7e;position:fixed;">
+    <div id="main" style="background-color: #042A38;height: auto;color:#fff !important">
+        <div class="navbar" style="display: inline-flex;width: 100%;color:#042A38;position:fixed;">
             <section style="margin: 1.5vw;">ONLINE EXAMINATION SYSTEM</section>
             <ul style="display: inline-flex;padding: 0 !important;margin: 0;float: right;right: 0;position: fixed;width: 50vw;">
                 <li onclick="dash()">Dashbord</li>
@@ -263,7 +266,7 @@ if (!$conn) {
                 <form style="width: 30vw" method="post">
                   
                         <h1>Add quiz</h1>
-                        <label for="quizname">Quiz name</label><br><br>
+                        <label for="quizname">Quiz name</label>
                         <input type="text" name="quizname" placeholder="enter quiz name" required><br><br>
                         <input type="submit" name="submit" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                   
@@ -273,8 +276,8 @@ if (!$conn) {
                 <form style="margin: 1vw;width: 30vw" method="post">
                     
                         <h1>Delete Quiz</h1>
-                        <label for="quizid">Quiz Id</label><br><br>
-                        <input type="number" name="quizid" placeholder="enter quiz id" required><br><br>
+                        <label for="quizid">Quiz Id</label>
+                        <input type="number" name="quizid" placeholder="enter quiz id" required><h7 onclick="score()" style="padding:0;color: #fff;font-size:1vw;text-decoration:underline">get Quiz ID</h7><br><br>
                         <input type="submit" name="submit1" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     
                 </form>
@@ -284,14 +287,14 @@ if (!$conn) {
                 <form style="margin: 1vw;width: 30vw" method="post">
                     
                         <h1>View Quiz</h1>
-                        <label for="quizid">Quiz Id</label><br><br>
-                        <input type="number" name="quizid" placeholder="enter quiz id" required><br><br>
+                        <label for="quizid">Quiz Id</label>
+                        <input type="number" name="quizid" placeholder="enter quiz id" required><h7 onclick="score()" style="padding:0;color: #fff;font-size:1vw;text-decoration:underline">get Quiz ID</h7><br><br>
                         <input type="submit" name="submit2" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     
                 </form>
             </section></center>
 
-            <section id="ans" style="display: none;">
+            <!-- <section id="ans" style="display: none;">
             <form style="margin: 5vw;width: 30vw" method="post">
                     <center>
                         <label for="quizname">Questions</label><br><br>
@@ -305,9 +308,9 @@ if (!$conn) {
                         <input type="submit" name="submit" value="submit" style="height: 3vw;width: 10vw;font-family: 'Courier New', Courier, monospace;font-weight: bolder;border-radius: 10px;border: 2px solid black;background-color: lightblue;">
                     </center>
                 </form>
-            </section>
+            </section> -->
         </section>
-        <section class="prof" id="prof" style="display: none;color:#7e7e7e;">
+        <section class="prof" id="prof" style="display: none;color:#042A38;">
             <p><b>Type of User&nbsp;:&nbsp;<?php echo $type1 ?></b></p>
             <p><b>NAME&nbsp;:&nbsp;<?php echo $dbname ?></b></p>
             <p><b>EMAIL&nbsp;:&nbsp;<?php echo $dbmail ?></b></p>
@@ -334,7 +337,7 @@ if (!$conn) {
         </section>
         <section style="color:#fff !important">
             <?php
-            $sql="select quizname,s.name,score,totalscore from student s,staff st,score sc,quiz q where q.quizid=sc.quizid and s.mail=sc.mail and q.mail='{$username1}' ORDER BY score DESC";
+            $sql="select quizname,s.name,score,totalscore from student s,staff st,score sc,quiz q where q.quizid=sc.quizid and s.mail=sc.mail and q.mail=st.mail and q.mail='{$username1}' ORDER BY score DESC";
             $res=mysqli_query($conn,$sql);
             if($res)
             {
@@ -343,7 +346,7 @@ if (!$conn) {
                 while ($row = mysqli_fetch_assoc($res)) {                
                     echo "<tr><td>".$row["quizname"]."</td><td>".$row["name"]."</td><td>".$row["score"]."</td><td>".$row["totalscore"]."</td></tr>"; 
                 }
-                echo "</table>";
+                echo "</table><br><br>";
             }
             else{
                 echo mysqli_error($conn);
@@ -370,9 +373,9 @@ echo '<script>' .
     "}" .
     "function lo(){" .
     "alert(\"Thank You for Using our Online Examination System\");";
-//session_unset();
+    //session_unset();
 //session_destroy();
-echo "window.location.replace(\"http://localhost/DBMSproject/DBMS-MINI-project/index.php\");" .
+echo "window.location.replace(\"index.php\");" .
     "}" .
     "function addquiz(){" .
     "document.getElementById(\"addq\").style=\"display: initial;\";" .
