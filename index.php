@@ -5,42 +5,42 @@
     <title>Online Examination System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head><?php
-if (isset($_POST['login'])) {
-    if (isset($_POST['usertype']) && isset($_POST['username']) && isset($_POST['pass'])) {
-        $conn = mysqli_connect('localhost', 'root', '', 'project');
-        if (!$conn) {
-            echo "<script>alert(\"Database error retry after some time !\")</script>";
-        }
-        $type = mysqli_real_escape_string($conn, $_POST['usertype']);
-        $username = mysqli_real_escape_string($conn, $_POST['username']);
-        $password = mysqli_real_escape_string($conn, $_POST['pass']);
-        $password = crypt($password, 'rakeshmariyaplarrakesh');
-        $sql = "select * from " . $type . " where mail='{$username}'";
-        $res =   mysqli_query($conn, $sql);
-        if ($res == true) {
-            global $dbmail, $dbpw;
-            while ($row = mysqli_fetch_array($res)) {
-                $dbpw = $row['pw'];
-                $dbmail = $row['mail'];
-                $_SESSION["name"] = $row['name'];
-                $_SESSION["type"]=$type;
-                $_SESSION["username"]=$dbmail;
-            }
-            if ($dbpw === $password) {
-                if($type==='student'){
-                    header("location:homestud.php");
-                }elseif($type==='staff'){
-                    header("Location: homestaff.php");
+        if (isset($_POST['login'])) {
+            if (isset($_POST['usertype']) && isset($_POST['username']) && isset($_POST['pass'])) {
+                $conn = mysqli_connect('localhost', 'root', '', 'project');
+                if (!$conn) {
+                    echo "<script>alert(\"Database error retry after some time !\")</script>";
                 }
-            } elseif ($dbpw !== $password && $dbmail === $username) {
-                echo "<script>alert('password is wrong');</script>";
-            } elseif ($dbpw !== $password && $dbmail !== $username) {
-                echo "<script>alert('username name not found sing up');</script>";
+                $type = mysqli_real_escape_string($conn, $_POST['usertype']);
+                $username = mysqli_real_escape_string($conn, $_POST['username']);
+                $password = mysqli_real_escape_string($conn, $_POST['pass']);
+                $password = crypt($password, 'rakeshmariyaplarrakesh');
+                $sql = "select * from " . $type . " where mail='{$username}'";
+                $res =   mysqli_query($conn, $sql);
+                if ($res == true) {
+                    global $dbmail, $dbpw;
+                    while ($row = mysqli_fetch_array($res)) {
+                        $dbpw = $row['pw'];
+                        $dbmail = $row['mail'];
+                        $_SESSION["name"] = $row['name'];
+                        $_SESSION["type"] = $type;
+                        $_SESSION["username"] = $dbmail;
+                    }
+                    if ($dbpw === $password) {
+                        if ($type === 'student') {
+                            header("location:homestud.php");
+                        } elseif ($type === 'staff') {
+                            header("Location: homestaff.php");
+                        }
+                    } elseif ($dbpw !== $password && $dbmail === $username) {
+                        echo "<script>alert('password is wrong');</script>";
+                    } elseif ($dbpw !== $password && $dbmail !== $username) {
+                        echo "<script>alert('username name not found sing up');</script>";
+                    }
+                }
             }
         }
-    }
-}
-?>
+        ?>
 <style>
     @media screen and (max-width: 620px) {
         input {
@@ -75,19 +75,21 @@ if (isset($_POST['login'])) {
         font-weight: bolder;
         font-size: 1.5vw;
     }
-    form{
+
+    form {
         font-size: 1.5vw;
         margin: 0;
     }
 
     button:hover {
-        background-color:#fff !important;
+        background-color: #fff !important;
     }
 
     .bg {
         background-size: 100%;
     }
-    a{
+
+    a {
         color: #042A38;
     }
 </style>
@@ -121,7 +123,7 @@ if (isset($_POST['login'])) {
     </div>
     </center>
     </div>
-    <?php require("footer.php");?>
+    <?php require("footer.php"); ?>
 </body>
 
 </html>
