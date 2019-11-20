@@ -1,2 +1,7 @@
 # DBMS-MINI-Project
- DBMS projecct on topic Online Examination System
+ DBMS project on topic Online Examination System
+
+
+Technology Used:
+Front-End: HTML,CSS,JavaScript
+Back-End: PHP,MySql
