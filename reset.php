@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'tls';
                     $mail->Username = 'osesvit2021@gmail.com';
-                    $mail->Password = 'OSE2021SVIT';
+                    $mail->Password = '**********';
                     $mail->setFrom('osesvit2021@gmail.com');
                     $mail->addAddress($dbmail);
                     $mail->addReplyTo('osesvit2021@gmail.com');
