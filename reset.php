@@ -100,7 +100,8 @@
 <?php
 if (isset($_POST['submit'])) {
     if (isset($_POST['email1']) && isset($_POST['pass1']) && isset($_POST['cpass1'])) {
-        $conn = mysqli_connect('localhost', 'root', '', 'project');
+			require 'sql.php';
+        $conn = mysqli_connect(host, user, ps, project);
         if (!$conn) {
             echo "<script>alert(\"Database error retry after some time !\")</script>";
         }

@@ -7,8 +7,8 @@
 </head><?php
         if (isset($_POST['login'])) {
             if (isset($_POST['usertype']) && isset($_POST['username']) && isset($_POST['pass'])) {
-                $conn = mysqli_connect('localhost', 'root', '', 'project');
-                if (!$conn) {
+require 'sql.php';
+        $conn = mysqli_connect(host, user, ps, project);                if (!$conn) {
                     echo "<script>alert(\"Database error retry after some time !\")</script>";
                 }
                 $type = mysqli_real_escape_string($conn, $_POST['usertype']);
