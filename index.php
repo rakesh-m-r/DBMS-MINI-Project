@@ -8,7 +8,7 @@
 </head><?php
         if (isset($_POST['login'])) {
             if (isset($_POST['usertype']) && isset($_POST['username']) && isset($_POST['pass'])) {        $conn = mysqli_connect('sql204.epizy.com','epiz_25149817',
-'rakesh1999','epiz_25149817_project');                if (!$conn) {
+'rakesh1999','epiz_25149817_project',3306);                if (!$conn) {
                     echo "<script>alert(\"Database error retry after some time !\")</script>";
                 }
                 $type = mysqli_real_escape_string($conn, $_POST['usertype']);
