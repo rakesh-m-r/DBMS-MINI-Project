@@ -9,8 +9,8 @@
 if (isset($_POST['studsu'])) {
     session_start();
     if (isset($_POST['name1']) && isset($_POST['usn1']) && isset($_POST['mail1']) && isset($_POST['phno1']) && isset($_POST['dept1']) && isset($_POST['dob1']) && isset($_POST['gender1']) && isset($_POST['password1']) && isset($_POST['cpassword1'])) {
-require 'sql.php';
-        $conn = mysqli_connect(host, user, ps, project);        if (!$conn) {
+        require_once 'sql.php';
+        $conn = mysqli_connect($host, $user, $ps, $project);       if (!$conn) {
             echo "<script>alert(\"Database error retry after some time !\")</script>";
         }
         $name1 = mysqli_real_escape_string($conn, $_POST['name1']);

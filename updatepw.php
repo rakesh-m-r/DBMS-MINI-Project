@@ -88,8 +88,8 @@ $type= $_SESSION["type"]; ?>
 </body>
 <?php
 if (isset($_POST['submit1'])) {
-require 'sql.php';
-        $conn = mysqli_connect(host, user, ps, project);        if (!$conn) {
+    require_once 'sql.php';
+    $conn = mysqli_connect($host, $user, $ps, $project);        if (!$conn) {
             echo "<script>alert(\"Database error retry after some time !\")</script>";
         }else{
         if (isset($_POST['submit1'])) {

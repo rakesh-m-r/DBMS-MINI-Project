@@ -9,8 +9,8 @@
 <?php
 session_start();
 error_reporting(E_ERROR | E_PARSE);
-require 'sql.php';
-        $conn = mysqli_connect(host, user, ps, project);if (!$conn) {
+require_once 'sql.php';
+                $conn = mysqli_connect($host, $user, $ps, $project);if (!$conn) {
     echo "<script>alert(\"Database error retry after some time !\")</script>";
 }
 ?>
