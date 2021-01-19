@@ -4,15 +4,11 @@
 <head>
     <title>Online Examination System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 </head><?php
         if (isset($_POST['login'])) {
-            if (isset($_POST['usertype']) && isset($_POST['username']) && isset($_POST['pass'])) {
-                $conn = mysqli_connect('localhost', 'root', '', 'project');
-                if (!$conn) {
+            if (isset($_POST['usertype']) && isset($_POST['username']) && isset($_POST['pass'])) {        $conn = mysqli_connect( 'sql204.byetcluster.com','epiz_25149817',
+'rakesh1999','epiz_25149817_project',3306);                if (!$conn) {
                     echo "<script>alert(\"Database error retry after some time !\")</script>";
                 }
                 $type = mysqli_real_escape_string($conn, $_POST['usertype']);
@@ -97,16 +93,19 @@
     a {
         color: #042A38;
     }
+		.login{
+			max-height: 70vh;
+		}
 </style>
 
 <body style="margin:0;height: 100%;ouline:none;color: #042A38f !important;padding-botton:5vw;">
     <div class="bg" style="font-weight: bolder;background-image: url(./images/rakesh.png);background-repeat: no-repeat;padding: 0;margin: 0;background-size: cover;font-family: 'Courier New', Courier, monospace;opacity: 0.9;height: 100%;">
         <center>
-            <h1 style=" color:#042A38;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
+            <h1 class="w3-container" style=" color:#042A38;text-transform: uppercase;width: auto;background:#fff;padding: 1vw;">ONLINE
                 Examination System</h1>
         </center>
         <center>
-            <div class="login" style="color: #042A38;width: 40vw;background-color: #fff;border: 2px solid black;padding: 2vw;font-weight: bolder;margin-top: 10vh;border-radius: 10px;">
+            <div class="w3-card" class="login" style="color: #042A38;width: 40vw;background-color: #ffffffab;border: 2px solid black;padding: 2vw;font-weight: bolder;margin-top: 10vh;border-radius: 10px;">
                 <form method="POST">
                     <div class="seluser">
                         <input type="radio" name="usertype" value="student" required>STUDENT

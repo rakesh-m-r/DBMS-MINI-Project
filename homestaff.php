@@ -8,8 +8,8 @@
 </head>
 <?php
 session_start();
-$conn = mysqli_connect('localhost', 'root', '', 'project');
-if (!$conn) {
+require 'sql.php';
+        $conn = mysqli_connect(host, user, ps, project);if (!$conn) {
     echo "<script>alert(\"Database error retry after some time !\")</script>";
 } else {
     $type1 = $_SESSION["type"];

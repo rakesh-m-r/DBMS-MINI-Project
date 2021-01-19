@@ -106,7 +106,8 @@
 <?php
 if (isset($_POST['submit'])) {
     if (isset($_POST['email1']) && isset($_POST['pass1']) && isset($_POST['cpass1'])) {
-                $conn = mysqli_connect('localhost', 'root','','project');
+			require 'sql.php';
+        $conn = mysqli_connect(host, user, ps, project);
         if (!$conn) {
             echo "<script>alert(\"Database error retry after some time !\")</script>";
         }
@@ -136,7 +137,7 @@ if (isset($_POST['submit'])) {
                     $mail->SMTPAuth = true;
                     $mail->SMTPSecure = 'tsl';
                     $mail->Username = 'osesvit2021@gmail.com';
-                    $mail->Password = 'OSE2021SVIT';
+                    $mail->Password = '**********';
                     $mail->setFrom('osesvit2021@gmail.com');
                     $mail->addAddress($dbmail);
                     $mail->addReplyTo('osesvit2021@gmail.com');
@@ -173,6 +174,9 @@ mail($dbmail,'Reset your Online Examination system password','<center><div style
 }
 ?>
 </html>
+<<<<<<< HEAD
 <?php
 echo !extension_loaded('openssl')?"Not Available":"Available";
 ?>
+=======
+>>>>>>> 94dd68fb2851c5b07775b5f843da8e51c7301b64

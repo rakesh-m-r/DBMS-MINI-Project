@@ -1,6 +1,7 @@
 # DBMS-MINI-Project
  DBMS project on topic Online Examination System
 
+<b>link:<a href="http://dbproject.cf/">http://dbproject.cf/</a></b>
 
 <b>Technology Used:</b>
 
@@ -35,7 +36,6 @@ Functional Specification:
 4.Generating result after the exam.
 
 
-
 <b>Schema Diagram</b>
  <img src="https://imgur.com/CEVPaEm.png" width=100%>
  
@@ -56,3 +56,9 @@ Functional Specification:
 <img src="https://imgur.com/gdsCmoY.png" width=100%>
 
 <img src="https://imgur.com/tReWRcw.png" width=100%>
+
+<b>How to run this project locally</b>
+1. clone this repo to www folder in WAMP software
+2. import the SQL file WAMP.
+3. replace *** in sql.php file with your database credentials.
+4. open localhost in browser. you see the home page
