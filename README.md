@@ -59,6 +59,7 @@ Functional Specification:
 
 <b>How to run this project locally</b>
 1. clone this repo to www folder in WAMP software
-2. import the SQL file WAMP.
-3. replace *** in sql.php file with your database credentials.
-4. open localhost in browser. you see the home page
+2. Open phpmydmin & Create new database with name projet
+3. import the SQL file present in SQL Files Folder using import option in phpmyadmin.
+4. changes credentials in sql.php file with your database credentials.
+5. open localhost in browser. you see the home page
