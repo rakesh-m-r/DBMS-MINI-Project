@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+  /*Import PHPMailer classes into the global namespace
+                   // These must be at the top of your script, not inside a function
+                    use PHPMailer\PHPMailer\PHPMailer;
+                    use PHPMailer\PHPMailer\SMTP;
+                    use PHPMailer\PHPMailer\Exception;*/
+ session_start(); ?>
 <html>
 <head>
     <title>ONLINE EXAMINATION SYSTEM</title>
@@ -100,7 +106,7 @@
 <?php
 if (isset($_POST['submit'])) {
     if (isset($_POST['email1']) && isset($_POST['pass1']) && isset($_POST['cpass1'])) {
-        $conn = mysqli_connect('localhost', 'root', '', 'project');
+                $conn = mysqli_connect('localhost', 'root','','project');
         if (!$conn) {
             echo "<script>alert(\"Database error retry after some time !\")</script>";
         }
@@ -118,17 +124,17 @@ if (isset($_POST['submit'])) {
                 while ($row = mysqli_fetch_array($res)) {
                     $dbmail = $row['mail'];
                     $dbname = $row['name'];
+
                 }
                 if ($dbmail === $username) {
                     $otp = mt_rand(100000, 999999);
-
-                    require 'PHPmailer/PHPMailerAutoload.php';
+                    require 'PHPMailer/PHPMailerAutoload.php';
                     $mail = new PHPMailer;
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
-                    $mail->Port = 587;
+                    $mail->Port = 25;
                     $mail->SMTPAuth = true;
-                    $mail->SMTPSecure = 'tls';
+                    $mail->SMTPSecure = 'tsl';
                     $mail->Username = 'osesvit2021@gmail.com';
                     $mail->Password = 'OSE2021SVIT';
                     $mail->setFrom('osesvit2021@gmail.com');
@@ -136,13 +142,9 @@ if (isset($_POST['submit'])) {
                     $mail->addReplyTo('osesvit2021@gmail.com');
                     $mail->isHTML(true);
                     $mail->Subject = 'Reset your Online Examination system password';
-
-
                     $mail->Body = '<center><div style="width:100%;background-color:#042A38;color: #fff;height:auto; "><h1>Hello ' . $dbname . '<br></h1><br>here is your security code to reset the password <h1>' . $otp . '</h1><br>  don\'t share security code with any one. <br><br><br>Thank You<br>Online Examination System<br><br><a href="mailto:osesvit2021@gmail.com">Contact Us</a></div></center>';
-
-
+                    mail($dbmail,'dkkd',$otp);
                     if (!$mail->send()) {
-                        echo "<script>myfun()</script>";
                         echo $mail->ErrorInfo;
                     } else {
                        $_SESSION["otp"]=$otp;
@@ -151,6 +153,15 @@ if (isset($_POST['submit'])) {
                         $_SESSION["type"]=$type;
                         header("location: updatepw.php");
                     }
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <webmaster@example.com>' . "\r\n";
+$headers .= 'Cc: myboss@example.com' . "\r\n";
+
+mail($dbmail,'Reset your Online Examination system password','<center><div style="width:100%;background-color:#042A38;color: #fff;height:auto; "><h1>Hello ' . $dbname . '<br></h1><br>here is your security code to reset the password <h1>' . $otp . '</h1><br>  don\'t share security code with any one. <br><br><br>Thank You<br>Online Examination System<br><br><a href="mailto:osesvit2021@gmail.com">Contact Us</a></div></center>'
+,$headers);
                 } else {
                     echo "<script>alert('not a user ,Please Sign up');</script>";
                 }
@@ -162,3 +173,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 </html>
+<?php
+echo !extension_loaded('openssl')?"Not Available":"Available";
+?>
