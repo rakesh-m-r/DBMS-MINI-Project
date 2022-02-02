@@ -7,6 +7,8 @@
 
 <b>Back-End:</b> PHP,MySql
 
+<b>Link: https://rakeshmariyaplar.herokuapp.com/</b>
+
 
 <b>Software Used:</b>WAMP
 
