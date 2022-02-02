@@ -1,7 +1,7 @@
 <?php 
 // replace *** with your database credentials
-$host='localhost';
-$user='root';
-$project='project';
-$ps='';
+$host=$_ENV["host"];
+$user=$_ENV["username"];
+$project=$_ENV["project"];
+$ps=$_ENV["password"];
 ?>
