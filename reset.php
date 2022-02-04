@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+  /*Import PHPMailer classes into the global namespace
+                   // These must be at the top of your script, not inside a function
+                    use PHPMailer\PHPMailer\PHPMailer;
+                    use PHPMailer\PHPMailer\SMTP;
+                    use PHPMailer\PHPMailer\Exception;*/
+ session_start(); ?>
 <html>
 <head>
     <title>ONLINE EXAMINATION SYSTEM</title>
@@ -100,8 +106,8 @@
 <?php
 if (isset($_POST['submit'])) {
     if (isset($_POST['email1']) && isset($_POST['pass1']) && isset($_POST['cpass1'])) {
-			require 'sql.php';
-        $conn = mysqli_connect(host, user, ps, project);
+        require_once 'sql.php';
+        $conn = mysqli_connect($host, $user, $ps, $project);
         if (!$conn) {
             echo "<script>alert(\"Database error retry after some time !\")</script>";
         }
@@ -119,32 +125,27 @@ if (isset($_POST['submit'])) {
                 while ($row = mysqli_fetch_array($res)) {
                     $dbmail = $row['mail'];
                     $dbname = $row['name'];
+
                 }
                 if ($dbmail === $username) {
                     $otp = mt_rand(100000, 999999);
-
-                    require 'PHPmailer/PHPMailerAutoload.php';
+                    require 'PHPMailer/PHPMailerAutoload.php';
                     $mail = new PHPMailer;
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->Port = 587;
-                    $mail->SMTPAuth = true;
-                    $mail->SMTPSecure = 'tls';
-                    $mail->Username = 'osesvit2021@gmail.com';
-                    $mail->Password = '**********';
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                    $mail->Username = $_ENV["gmail"];
+                    $mail->Password = $_ENV["ps"];                        // SMTP password
+                    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465;                                    // TCP port to connect to
                     $mail->setFrom('osesvit2021@gmail.com');
                     $mail->addAddress($dbmail);
                     $mail->addReplyTo('osesvit2021@gmail.com');
                     $mail->isHTML(true);
                     $mail->Subject = 'Reset your Online Examination system password';
-
-
                     $mail->Body = '<center><div style="width:100%;background-color:#042A38;color: #fff;height:auto; "><h1>Hello ' . $dbname . '<br></h1><br>here is your security code to reset the password <h1>' . $otp . '</h1><br>  don\'t share security code with any one. <br><br><br>Thank You<br>Online Examination System<br><br><a href="mailto:osesvit2021@gmail.com">Contact Us</a></div></center>';
-
-
                     if (!$mail->send()) {
-                        echo "<script>myfun()</script>";
-                        echo $mail->ErrorInfo;
+                        echo "<script>alert("+$mail->ErrorInfo+"<)</script>";
                     } else {
                        $_SESSION["otp"]=$otp;
                         $_SESSION["username"]=$dbmail;

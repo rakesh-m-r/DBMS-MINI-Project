@@ -1,6 +1,7 @@
 <?php 
-$host='sql204.epizy.com';
-$user='epiz_25149817';
-$project='epiz_25149817_project';
-$ps='rakesh1999';
+// replace *** with your database credentials
+$host=$_ENV["host"];
+$user=$_ENV["username"];
+$project=$_ENV["project"];
+$ps=$_ENV["password"];
 ?>
