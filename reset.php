@@ -1,9 +1,7 @@
 <?php
-  /*Import PHPMailer classes into the global namespace
-                   // These must be at the top of your script, not inside a function
-                    use PHPMailer\PHPMailer\PHPMailer;
-                    use PHPMailer\PHPMailer\SMTP;
-                    use PHPMailer\PHPMailer\Exception;*/
+  require 'PHPMailer\src\PHPMailer.php';
+  require 'PHPMailer\src\SMTP.php';
+  require 'PHPMailer\src\Exception.php';
  session_start(); ?>
 <html>
 <head>
@@ -129,9 +127,7 @@ if (isset($_POST['submit'])) {
                 }
                 if ($dbmail === $username) {
                     $otp = mt_rand(100000, 999999);
-                    require 'PHPMailer/src/PHPMailer.php';
-                    require 'PHPMailer/src/SMTP.php';
-                    require 'PHPMailer/src/Exception.php';
+                  
                     $mail = new PHPMailer;
                     $mail->isSMTP();                                      // Set mailer to use SMTP
                     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
