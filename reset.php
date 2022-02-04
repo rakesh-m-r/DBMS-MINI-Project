@@ -129,7 +129,9 @@ if (isset($_POST['submit'])) {
                 }
                 if ($dbmail === $username) {
                     $otp = mt_rand(100000, 999999);
-                    require 'PHPMailer/PHPMailerAutoload.php';
+                    require 'PHPMailer/src/PHPMailer.php';
+                    require 'PHPMailer/src/SMTP.php';
+                    require 'PHPMailer/src/Exception.php';
                     $mail = new PHPMailer;
                     $mail->isSMTP();                                      // Set mailer to use SMTP
                     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
